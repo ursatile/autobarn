@@ -9,6 +9,7 @@ using System.Net;
 namespace Autobarn.Website {
 	public class Program {
 		public static void Main(string[] args) {
+            Console.WriteLine("Starting Autobarn.Website...");
 			CreateHostBuilder(args).Build().Run();
 		}
 
