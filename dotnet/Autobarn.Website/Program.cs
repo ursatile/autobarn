@@ -22,7 +22,7 @@ namespace Autobarn.Website {
                 .ConfigureWebHostDefaults(webBuilder => {
                     webBuilder.ConfigureKestrel(options => {
                         var pfxPassword = Environment.GetEnvironmentVariable("UrsatilePfxPassword");
-                        var https = UseCertIfAvailable(@"d:\workshop.ursatile.com\ursatile.com.pfx", pfxPassword);
+                        var https = UseCertIfAvailable(@"D:\Dropbox\workshop.ursatile.com\workshop.ursatile.com.pfx", pfxPassword);
                         options.ListenAnyIP(5000, listenOptions => listenOptions.Protocols = HttpProtocols.Http1AndHttp2);
                         options.Listen(IPAddress.Any, 5001, https);
                         options.AllowSynchronousIO = true;
