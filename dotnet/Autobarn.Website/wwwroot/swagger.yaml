@@ -24,7 +24,64 @@ paths:
               schema: 
                 type: array
                 items:
+                  $ref: '#/components/schemas/Vehicle'
+    post:
+      tags:
+        - Vehicles
+      parameters:
+        - in: body
+          name: vehicle
+          description: The details of the vehicle to create or update
+          schema:
+            $ref: '#/components/schemas/Vehicle'
+      responses:
+        201:
+          description: Created. A new vehicle has been added to the system.
+  /vehicles/{registration}:
+    get:
+      tags:
+        - Vehicles
+      summary: Returns a specific vehicle
+      parameters:
+        - $ref: '#/components/parameters/registration'
+      responses:
+        '404':
+          description: There is no vehicle in the system matching that registration
+        200:
+          description: A JSON array of vehicle objects
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
                   $ref: '#/components/schemas/Vehicle'                  
+    put:
+      tags:
+        - Vehicles
+      summary: Create or update a vehicle
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/components/parameters/registration'
+        - in: body
+          name: vehicle
+          description: The details of the vehicle to create or update
+          schema:
+            $ref: '#/components/schemas/Vehicle'
+      responses:
+        200:
+          description: OK.
+    delete:
+      tags:
+        - Vehicles
+      summary: Delete a vehicle from the system
+      parameters:
+        - $ref: '#/components/parameters/registration'
+      responses:
+        204:
+          description: OK - no content.
+        404:
+          description: Not found.
 components:
   schemas:
     Vehicle:
@@ -43,3 +100,11 @@ components:
         modelCode: dmc-delorean
         color: Silver
         year: 1985
+  parameters:
+    registration:
+      name: registration
+      in: path
+      description: The registration plate which uniquely identifies a vehicle
+      required: true
+      schema:
+        type: string
