@@ -44,7 +44,6 @@ namespace Autobarn.Website {
 			}
 
 
-			// app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger.yaml", "Autobarn API"));
 
 			app.UseHttpsRedirection();
 			app.UseDefaultFiles();
@@ -56,9 +55,10 @@ namespace Autobarn.Website {
 				}
 			};
 
-			app.UseStaticFiles(new StaticFileOptions {
-				ContentTypeProvider = provider
-			});
+			app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+
+			app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger.yaml", "Autobarn API"));
+
 
 			app.UseRouting();
 			app.UseAuthorization();
