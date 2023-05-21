@@ -5,8 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Autobarn.Website; 
+namespace Autobarn.Website;
 
 public class Startup {
 	protected virtual string DatabaseMode => Configuration["DatabaseMode"];
@@ -23,7 +25,14 @@ public class Startup {
 		services.AddControllersWithViews().AddNewtonsoftJson();
 
 		// Add the Swagger generator to the services collection
-		services.AddSwaggerGen();
+		services.AddSwaggerGen(options => {
+			options.SwaggerDoc("v1", new OpenApiInfo {
+				Version = "v1",
+				Title = "Autobarn API",
+				Description = "The Autobarn vehicle platform API"
+			});
+		});
+		services.AddSwaggerGenNewtonsoftSupport(); // explicit opt-in - needs to be placed after AddSwaggerGen()
 
 		services.AddRazorPages().AddRazorRuntimeCompilation();
 		Console.WriteLine(DatabaseMode);
