@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Autobarn.WebApp\Autobarn.WebApp.csproj" />
+		<ProjectReference Include="..\Autobarn.Website\Autobarn.Website.csproj" />
 		<ProjectReference Include="..\Autobarn.Data\Autobarn.Data.csproj" />
 	</ItemGroup>
 

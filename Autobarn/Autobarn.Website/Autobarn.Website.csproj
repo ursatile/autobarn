@@ -13,7 +13,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Autobarn.Data\Autobarn.Data.csproj" />
-		<InternalsVisibleTo Include="Autobarn.WebApp.Tests" />
+		<InternalsVisibleTo Include="Autobarn.Website.Tests" />
 	</ItemGroup>
 
 </Project>

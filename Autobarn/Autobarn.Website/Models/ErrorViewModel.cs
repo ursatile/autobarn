@@ -1,4 +1,4 @@
-namespace Autobarn.WebApp.Models;
+namespace Autobarn.Website.Models;
 
 public class ErrorViewModel {
 	public string? RequestId { get; set; }

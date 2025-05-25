@@ -1,6 +1,6 @@
 using Autobarn.Data.Entities;
-using Autobarn.WebApp.Controllers;
-using Autobarn.WebApp.Models;
+using Autobarn.Website.Controllers;
+using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;

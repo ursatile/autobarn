@@ -2,7 +2,7 @@ using Autobarn.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Autobarn.WebApp.Controllers;
+namespace Autobarn.Website.Controllers;
 
 public class MakesController(AutobarnDbContext db) : Controller {
 

@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Autobarn.WebApp.Models;
+using Autobarn.Website.Models;
 
-namespace Autobarn.WebApp.Controllers;
+namespace Autobarn.Website.Controllers;
 
 public class HomeController(ILogger<HomeController> logger) : Controller {
 

@@ -1,10 +1,10 @@
 using Autobarn.Data;
 using Autobarn.Data.Entities;
-using Autobarn.WebApp.Models;
+using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Autobarn.WebApp.Controllers;
+namespace Autobarn.Website.Controllers;
 
 public class VehiclesController(AutobarnDbContext db) : Controller {
 
