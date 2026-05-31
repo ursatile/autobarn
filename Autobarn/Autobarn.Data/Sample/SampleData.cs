@@ -1,22 +1,29 @@
 namespace Autobarn.Data.Sample;
 
-public static class SampleData {
+public static class SampleData
+{
 
-	public static IEnumerable<object> CarModels
-		=> EmbeddedResource.ReadAllLines("carmodels.csv", typeof(SampleData).Assembly)
+	public record CarModelCsvRecord(string Code, string MakeCode, string Name);
+
+	public record CarMakeCsvRecord(string Code, string Name);
+
+	public record VehicleCsvRecord(string Registration, string ModelCode, string Color, int Year);
+
+	public static IEnumerable<CarModelCsvRecord> CarModelCsvData
+		=> EmbeddedResource.ReadAllLines("models.csv", typeof(SampleData).Assembly)
 			.Select(line => line.Split(","))
 			.Where(tokens => tokens.Length == 3)
-			.Select(tokens => new { Code = tokens[0], MakeCode = tokens[1], Name = tokens[2] });
+			.Select(tokens => new CarModelCsvRecord(tokens[0], tokens[1], tokens[2]));
 
-	public static IEnumerable<object> Makes
+	public static IEnumerable<CarMakeCsvRecord> CarMakeCsvData
 		=> EmbeddedResource.ReadAllLines("makes.csv", typeof(SampleData).Assembly)
 			.Select(line => line.Split(","))
 			.Where(tokens => tokens.Length == 2)
-			.Select(tokens => new { Code = tokens[0], Name = tokens[1] });
+			.Select(tokens => new CarMakeCsvRecord(tokens[0], tokens[1]));
 
-	public static IEnumerable<object> Vehicles
+	public static IEnumerable<VehicleCsvRecord> VehicleCsvData
 		=> EmbeddedResource.ReadAllLines("vehicles.csv", typeof(SampleData).Assembly)
 			.Select(line => line.Split(","))
 			.Where(tokens => tokens.Length == 4)
-			.Select(tokens => new { Registration = tokens[0], ModelCode = tokens[1], Color = tokens[2], Year = Int32.Parse(tokens[3]) });
+			.Select(tokens => new VehicleCsvRecord(tokens[0], tokens[1], tokens[2], Int32.Parse(tokens[3])));
 }

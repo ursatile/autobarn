@@ -1,12 +1,16 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Autobarn.Data.Entities;
 
-public class Make {
+public class Make
+{
+	public string Code { get; set; } = "";
 
-	public string Code { get; set; } = default!;
-	public string Name { get; set; } = default!;
-
+	public string Name
+	{
+		get;
+		set;
+	} = "";
 	[JsonIgnore]
 	public virtual ICollection<CarModel> Models { get; set; } = new HashSet<CarModel>();
 }

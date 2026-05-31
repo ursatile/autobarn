@@ -6,14 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Autobarn.Website.Controllers;
 
-public class VehiclesController(AutobarnDbContext db) : Controller {
+public class VehiclesController(AutobarnDbContext db) : Controller
+{
 
-	public async Task<IActionResult> Index() {
+	public async Task<IActionResult> Index()
+	{
 		var vehicles = await db.Vehicles.ToListAsync();
 		return View(vehicles);
 	}
 
-	public async Task<IActionResult> Details(string id) {
+	public async Task<IActionResult> Details(string id)
+	{
 		var vehicle = await db.Vehicles
 			.Include(v => v.Model)
 			.ThenInclude(m => m!.Make)
@@ -23,12 +26,14 @@ public class VehiclesController(AutobarnDbContext db) : Controller {
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> Advertise(string id) {
+	public async Task<IActionResult> Advertise(string id)
+	{
 		var carModel = await db.Models
 			.Include(m => m.Make)
 			.FirstOrDefaultAsync(m => m.Code == id);
 		if (carModel == null) return NotFound();
-		var dto = new VehicleDto() {
+		var dto = new VehicleDto()
+		{
 			ModelCode = carModel.Code,
 			ModelName = $"{carModel.Name} {carModel.Name}"
 		};
@@ -36,7 +41,8 @@ public class VehiclesController(AutobarnDbContext db) : Controller {
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Advertise(VehicleDto dto) {
+	public async Task<IActionResult> Advertise(VehicleDto dto)
+	{
 		var existingVehicle = await db.Vehicles.FirstOrDefaultAsync(v => v.Registration == dto.Registration);
 
 		if (existingVehicle != default)
@@ -48,7 +54,8 @@ public class VehiclesController(AutobarnDbContext db) : Controller {
 			ModelState.AddModelError(nameof(dto.ModelCode), $"Sorry, {dto.ModelCode} is not a valid model code.");
 
 		if (!ModelState.IsValid) return View(dto);
-		var vehicle = new Vehicle() {
+		var vehicle = new Vehicle()
+		{
 			Registration = dto.Registration,
 			Color = dto.Color,
 			Model = carModel!,

@@ -2,7 +2,8 @@
 
 namespace Autobarn.Data.Entities;
 
-public class Vehicle {
+public class Vehicle
+{
 	public string? Registration { get; set; }
 	public string? Color { get; set; }
 	public int Year { get; set; }
