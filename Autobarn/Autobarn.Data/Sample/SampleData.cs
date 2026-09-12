@@ -1,7 +1,6 @@
 namespace Autobarn.Data.Sample;
 
-public static class SampleData
-{
+public static class SampleData {
 
 	public record CarModelCsvRecord(string Code, string MakeCode, string Name);
 
