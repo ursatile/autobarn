@@ -1,4 +1,4 @@
-@model List<CarModel>
+@model List<VehicleModel>
 
 @{
 	ViewBag.Title = "Models";
@@ -6,13 +6,13 @@
 }
 <h2>Vehicle Models</h2>
 @if(Model.Any()) {
-	@foreach(var group in Model.GroupBy(m => m.Make).OrderBy(m => m.Key.Name)) {
+	@foreach(var group in Model.GroupBy(m => m.VehicleMake).OrderBy(m => m.Key.Name)) {
 		<h3>@group.Key.Name</h3>
 		<ul>
 			@foreach(var carModel in group) {
 				<li>
 					<a href="@Url.Action("Details", "CarModels", new { id = carModel.Code })">
-						@carModel.Make.Name @carModel.Name
+						@carModel.VehicleMake.Name @carModel.Name
 					</a>
 				</li>
 			}

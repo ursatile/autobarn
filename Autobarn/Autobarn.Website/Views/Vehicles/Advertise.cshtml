@@ -8,7 +8,7 @@
 <form asp-action="Advertise" asp-controller="Vehicles" method="POST" id="advertise-vehicle-form">
 	@Html.HiddenFor(model => model.ModelCode)
 	@Html.HiddenFor(model => model.ModelName)
-	Make &amp; Model: @Html.DisplayFor(model => model.ModelName)
+	VehicleMake &amp; Model: @Html.DisplayFor(model => model.ModelName)
 	<hr />
 	<p>
 		@Html.LabelFor(model => model.Registration)
