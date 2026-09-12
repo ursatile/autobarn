@@ -3,7 +3,7 @@ root = true
 
 [*.*]
 indent_style = tab
-indent_size = tab
+indent_size = 2
 tab_width = 2
 charset = utf-8
 line_ending = lf
@@ -42,7 +42,7 @@ resharper_suggest_var_or_type_built_in_types_highlighting = hint
 resharper_suggest_var_or_type_elsewhere_highlighting = hint
 resharper_suggest_var_or_type_simple_types_highlighting = hint
 
-[*.cs,*.cshtml]
+[*.{cs,cshtml}]
 # Organize usings
 dotnet_separate_import_directive_groups = false
 
@@ -425,20 +425,20 @@ resharper_suggest_var_or_type_simple_types_highlighting = hint
 
 [*.{appxmanifest,asax,ascx,aspx,axaml,axml,build,c,c++,cc,cginc,compute,config,cp,cpp,cs,cshtml,csproj,css,cu,cuh,cxx,dbml,discomap,dtd,fx,fxh,h,hh,hlsl,hlsli,hlslinc,hpp,htm,html,hxx,inc,inl,ino,ipp,ixx,jsproj,lsproj,master,mpp,mq4,mq5,mqh,njsproj,nuspec,paml,proj,props,razor,resw,resx,skin,StyleCop,targets,tasks,tpp,usf,ush,vb,vbproj,xaml,xamlx,xml,xoml,xsd}]
 indent_style = tab
-indent_size = tab
+indent_size = 2
 tab_width = 2
 
 [*.cql]
 indent_style = tab
-indent_size = tab
+indent_size = 4
 tab_width = 4
 
 [*.{appxmanifest,asax,ascx,aspx,axaml,axml,config,cs,cshtml,csproj,dbml,discomap,dtd,htm,html,jsproj,lsproj,master,njsproj,nuspec,paml,proj,props,razor,resw,resx,skin,sql,StyleCop,targets,tasks,vb,vbproj,xaml,xamlx,xml,xoml,xsd}]
 indent_style = tab
-indent_size = tab
+indent_size = 2
 tab_width = 2
 
 [*.{appxmanifest,asax,ascx,aspx,axaml,axml,config,cql,cs,cshtml,csproj,dbml,discomap,dtd,htm,html,jsproj,lsproj,master,njsproj,nuspec,paml,proj,props,razor,resw,resx,skin,sql,StyleCop,targets,tasks,vb,vbproj,xaml,xamlx,xml,xoml,xsd}]
 indent_style = tab
-indent_size = tab
+indent_size = 2
 tab_width = 2
