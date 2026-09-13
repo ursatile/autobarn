@@ -1,15 +1,14 @@
-@model Autobarn.Data.Entities.Vehicle
+@model Vehicle
 @{
-	ViewData["Title"] = $"{Model.Registration} : Autobarn";
+	ViewData["Title"] = Model.Registration;
 }
 <h2 class="license-plate">@Model.Registration</h2>
 <hr />
 <dl>
-	<dt>VehicleMake:</dt>
-	<dd><a href="@Url.Action("Details", "Makes", new { id = Model.Model.MakeCode })">@Model.Model.VehicleMake.Name</a></dd>
+	<dt>Make:</dt>
+	<dd><a asp-controller="Makes" asp-action="Details" asp-route-id="@Model.Model.MakeCode">@Model.Model.VehicleMake.Name</a></dd>
 	<dt>Model:</dt>
-	<dd><a href="@Url.Action("Details", "CarModels", new { id = Model.ModelCode })">@Model.Model.Name</a></dd>
-	<dd>@Model.Model.Name</dd>
+	<dd><a asp-controller="CarModels" asp-action="Details" asp-route-id="@Model.ModelCode">@Model.Model.Name</a></dd>
 	<dt>Year:</dt>
 	<dd>@Model.Year</dd>
 	<dt>Colour:</dt>

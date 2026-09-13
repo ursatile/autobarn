@@ -15,6 +15,7 @@ public class MakesController(AutobarnDbContext db) : Controller {
 		var make = await db.Makes
 			.Include(m => m.Models)
 			.FirstOrDefaultAsync(m => m.Code == id);
+		if (make == null) return NotFound();
 		return View(make);
 	}
 }

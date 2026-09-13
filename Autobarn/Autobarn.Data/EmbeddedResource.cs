@@ -2,33 +2,35 @@ using System.Reflection;
 
 namespace Autobarn.Data;
 
-public class EmbeddedResource {
+public static class EmbeddedResource {
 
 	public static Stream OpenStream(string resourceFileName, Assembly? assembly = null) {
-		assembly ??= Assembly.GetAssembly(typeof(EmbeddedResource));
-		var name = assembly!.GetManifestResourceNames()
+		assembly ??= typeof(EmbeddedResource).Assembly;
+		var name = assembly.GetManifestResourceNames()
 			.FirstOrDefault(n => n.EndsWith(resourceFileName, StringComparison.OrdinalIgnoreCase));
-		if (name is null) throw new("Resource not found: " + resourceFileName);
-		var stream = assembly.GetManifestResourceStream(name);
-		if (stream is null) throw new("Resource not found: " + resourceFileName);
-		return stream;
+		return (name is null ? null : assembly.GetManifestResourceStream(name))
+			?? throw new FileNotFoundException($"Embedded resource not found in {assembly.GetName().Name}", resourceFileName);
 	}
 
 	public static byte[] ReadBytes(string resourceFileName, Assembly? assembly = null) {
+		using var stream = OpenStream(resourceFileName, assembly);
 		using var ms = new MemoryStream();
-		OpenStream(resourceFileName, assembly).CopyTo(ms);
+		stream.CopyTo(ms);
 		return ms.ToArray();
 	}
 
-	public static string ReadAllText(string resourceFileName, Assembly? assembly = null)
-		=> new StreamReader(OpenStream(resourceFileName, assembly)).ReadToEnd();
+	public static string ReadAllText(string resourceFileName, Assembly? assembly = null) {
+		using var reader = new StreamReader(OpenStream(resourceFileName, assembly));
+		return reader.ReadToEnd();
+	}
 
 	public static string[] ReadAllLines(string resourceFileName, Assembly? assembly = null)
 		=> ReadAllText(resourceFileName, assembly).ReplaceLineEndings().Split(Environment.NewLine);
 
-	public static IEnumerable<string[]> ReadCsvData(string resourceFileName, Assembly? assembly = null, int columns = 0)
+	/// <summary>Reads a simple (unquoted) CSV resource, skipping any line that doesn't have exactly <paramref name="columns"/> fields.</summary>
+	public static IEnumerable<string[]> ReadCsvData(string resourceFileName, int columns, Assembly? assembly = null)
 		=> ReadAllLines(resourceFileName, assembly)
-			.Select(line => line.Split(","))
+			.Select(line => line.Split(','))
 			.Where(items => items.Length == columns);
 
 }

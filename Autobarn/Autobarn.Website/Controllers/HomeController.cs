@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Autobarn.Website.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller {
+public class HomeController : Controller {
 
 	public IActionResult Index() {
+		return View();
+	}
+
+	public IActionResult Privacy() {
 		return View();
 	}
 

@@ -1,13 +1,13 @@
 @model List<VehicleMake>
 
 @{
-	ViewBag.Title = "Makes";
+	ViewData["Title"] = "Makes";
 }
 
-<h2>Vehicle VehicleMakes</h2>
-@if(Model.Any()) {
+<h2>Vehicle Makes</h2>
+@if (Model.Any()) {
 	<ul>
-		@foreach(var make in Model) {
+		@foreach (var make in Model) {
 			<li><a asp-controller="Makes" asp-action="Details" asp-route-id="@make.Code">@make.Name</a></li>
 		}
 	</ul>

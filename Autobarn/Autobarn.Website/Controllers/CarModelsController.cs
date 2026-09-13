@@ -13,10 +13,11 @@ public class CarModelsController(AutobarnDbContext db) : Controller {
 	}
 
 	public async Task<IActionResult> Details(string id) {
-		var make = await db.Models
+		var carModel = await db.Models
 			.Include(m => m.VehicleMake)
 			.Include(m => m.Vehicles)
 			.FirstOrDefaultAsync(m => m.Code == id);
-		return View(make);
+		if (carModel == null) return NotFound();
+		return View(carModel);
 	}
 }

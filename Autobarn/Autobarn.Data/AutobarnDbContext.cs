@@ -1,4 +1,5 @@
 using Autobarn.Data.Entities;
+using Autobarn.Data.Sample;
 using Microsoft.EntityFrameworkCore;
 
 namespace Autobarn.Data;
@@ -40,5 +41,22 @@ public class AutobarnDbContext(
 			entity.Property(e => e.Color).HasMaxLength(32).IsUnicode(false);
 			entity.Property(e => e.ModelCode).HasMaxLength(32).IsUnicode(false);
 		});
+
+		modelBuilder.Entity<VehicleMake>().HasData(SampleData.VehicleMakeData);
+		modelBuilder.Entity<VehicleModel>().HasData(SampleData.VehicleModelData);
+	}
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+		optionsBuilder
+			.UseSeeding((dbContext, _) => {
+				if (dbContext.Set<Vehicle>().Any()) return;
+				dbContext.AddRange(SampleData.Vehicles);
+				dbContext.SaveChanges();
+			})
+			.UseAsyncSeeding(async (dbContext, _, cancellationToken) => {
+				if (await dbContext.Set<Vehicle>().AnyAsync(cancellationToken)) return;
+				await dbContext.AddRangeAsync(SampleData.Vehicles, cancellationToken);
+				await dbContext.SaveChangesAsync(cancellationToken);
+			});
 	}
 }

@@ -1,13 +1,13 @@
-@model IEnumerable<Autobarn.Data.Entities.Vehicle>
+@model IEnumerable<Vehicle>
 @{
 	ViewData["Title"] = "Vehicles";
 }
 <h2>Vehicles</h2>
-@if(Model.Any()) {
+@if (Model.Any()) {
 	<ul class="vehicles">
-		@foreach(var vehicle in Model) {
+		@foreach (var vehicle in Model) {
 			<li class="vehicle">
-				<a href="@Url.Action("Details", "Vehicles", new { id = vehicle.Registration })">@vehicle.Registration</a>
+				<a asp-controller="Vehicles" asp-action="Details" asp-route-id="@vehicle.Registration">@vehicle.Registration</a>
 			</li>
 		}
 	</ul>
