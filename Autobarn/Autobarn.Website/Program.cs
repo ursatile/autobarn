@@ -13,7 +13,6 @@ await keepAliveConnection.OpenAsync();
 
 builder.Services.AddDbContext<AutobarnDbContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
-builder.Services.AddOpenApi();
 builder.Services.AddValidation();
 
 var app = builder.Build();
